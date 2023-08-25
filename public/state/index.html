@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>State Machine Website</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 id="state-title">Born</h1>
+        <button id="transition-btn" class="btn btn-primary">Transition</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //   const stateMachine = { /* ... */ }; // Define your state machine here
+            const stateMachine = {
+                currentState: 'born',
+                states: {
+                    born: {
+                        nextState: 'kid',
+                        onEnter: () => {
+                            console.log("Welcome to the world!");
+                            // Perform other actions for this state
+                        }
+                    },
+                    kid: {
+                        nextState: 'adult',
+                        onEnter: () => {
+                            console.log("Enjoy your childhood!");
+                            // Perform other actions for this state
+                        }
+                    },
+                    adult: {
+                        nextState: 'old',
+                        onEnter: () => {
+                            console.log("Welcome to adulthood!");
+                            // Perform other actions for this state
+                        }
+                    },
+                    old: {
+                        nextState: 'die',
+                        onEnter: () => {
+                            console.log("Embrace your golden years!");
+                            // Perform other actions for this state
+                        }
+                    },
+                    die: {
+                        nextState: null,
+                        onEnter: () => {
+                            console.log("The journey has ended.");
+                            // Perform other actions for this state
+                        }
+                    }
+                },
+                transition: function () {
+                    const currentStateObj = this.states[this.currentState];
+                    const nextState = currentStateObj.nextState;
+                    if (nextState) {
+                        currentStateObj.onEnter();
+                        this.currentState = nextState;
+                    }
+                }
+            };
+
+            // Test the state transitions
+            // stateMachine.transition(); // Output: Welcome to the world!
+            // stateMachine.transition(); // Output: Enjoy your childhood!
+            // stateMachine.transition(); // Output: Welcome to adulthood!
+            // ...
+
+
+            $("#transition-btn").click(function () {
+                stateMachine.transition();
+                $("#state-title").text(stateMachine.currentState);
+            });
+        });
+    </script>
+</body>
+
+</html>
