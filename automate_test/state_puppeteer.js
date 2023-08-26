@@ -7,9 +7,19 @@ const puppeteer = require('puppeteer');
 //   await page.goto('your_website_url_here');
     await page.goto('http://localhost:3052/state/');
 
+    //<h1 id="state-title">Born</h1>
+    //  id="state-title"
+    // #state-title
+    //<h1 id="state-title">
+    //  Born
+    //</h1>
+
     const titleText1 = await page.$eval('#state-title', element => element.textContent);
 
     console.log('Current title text:', titleText1);
+
+  //<button id="transition-btn" class="btn btn-primary">Transition</button>
+  // #transition-btn
 
   await page.click('#transition-btn'); // Click the transition button
 
